@@ -1,8 +1,4 @@
 <?php
-/*
- * Author(s): Sehoan Choi (sc8zt)
- * url: https://cs4640.cs.virginia.edu/sc8zt/learning_hanja/
- */
 
 spl_autoload_register(function($classname) {
   include "controllers/$classname.php";
