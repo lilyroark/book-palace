@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Hanja Learner</title>
+    <title>Book Palace</title>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="author" content="Ryu Patterson & Sehoan Choi">
-    <meta name="description" content="Learn Hanja easily">
+    <meta name="author" content="Lily Roark">
+    <meta name="description" content="Check out, view books">
     <meta name="keywords" content="Learning">
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
@@ -56,9 +56,7 @@
     <footer>
       <div>
         <small>
-          © 2021 Mike Choi & Ryu Patterson | KR Data from
-          http://www.happycgi.com/13322#1 | JP Data from
-          http://www.edrdg.org/enamdict/enamdict_doc.html
+          © 2021 Lily Roark, Mike Choi, Areeba Kausar, Selena Johnson
         </small>
       </div>
     </footer>
