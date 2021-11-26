@@ -20,21 +20,21 @@ function createCard($books_arr) {
 
 
 <?php
-
+session_start();
 $db = new mysqli("mysql01.cs.virginia.edu", "sc8zt", "password123", "sc8zt");
-$useremail = "amaclead@gmail.com"; // Later get this from cookies etc
+$username = $_SESSION["username"];
 $user = null;
-$get_username = $db->prepare("select username from user1 where email_address = ?;");
-$get_username->bind_param("s", $useremail);
-if (!$get_username->execute()) {
+$get_useremail = $db->prepare("select email_address from user1 where username = ?;");
+$get_useremail->bind_param("s", $username);
+if (!$get_useremail->execute()) {
   $error_msg = "Error: User could not be found";
 }
-$get_username_data = $get_username->get_result()->fetch_all(MYSQLI_ASSOC);
+$get_useremail_data = $get_useremail->get_result()->fetch_all(MYSQLI_ASSOC);
 
 
 $user = [
-    "username" => $get_username_data[0]["username"],
-    "email" => $useremail
+    "email" => $get_useremail_data[0]["email_address"],
+    "username" => $username
 ];
 
 $mybooks_stmt = $db->prepare("select book1.title, writes.author_name, writes.isbn from checks_out1 natural join book1 natural join writes where checks_out1.username = ?;");

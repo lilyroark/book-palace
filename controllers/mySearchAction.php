@@ -1,9 +1,13 @@
 <?php
+session_start();
 include_once("../controllers/database_connection.php"); 
 //  add to favorites needs users, add to checkout
 
  $con = new mysqli($dbserver, $dbuser, $dbpass, $dbdatabase);
  $user = $_POST['username'];
+ if (!isset($_SESSION["username"])) {
+     echo "Session username not set?";
+ }
  // Check connection
  if (mysqli_connect_errno())
  {
