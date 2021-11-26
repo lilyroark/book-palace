@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+  <!-- <head>
     <title>Hanja Learner | Search</title>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,22 +19,23 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
     <script src="https://use.fontawesome.com/0604459c37.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-  </head>
+  </head> -->
   <body>
+    <p>Heyyyy </p>
     <!--Top Navigation / Header bar-->
     <header>
       <div id="header-logo">
         <i class="fa fa-user-circle fa-2x"></i>
-        <p><?=$_SESSION["username"]?></p>
+        <!-- <p><?=$_SESSION["username"]?></p> -->
         <!--Hidden menu pop up-->
-        <div id="menus">
+        <!-- <div id="menus">
           <ul>
             <li><a>Account</a></li>
             <li><a href="<?=$this->base_url?>/account/wordbook">My Wordbook</a></li>
             <li><a href="<?=$this->base_url?>/account/recent_search">Recent Search</a></li>
             <li><a href="<?=$this->base_url?>/account/logout">Log Out</a></li>
           </ul>
-        </div>
+        </div> -->
       </div>
       <p>
       <span class="active-lang">EN</span> |
@@ -44,10 +45,10 @@
     </header>
     <!--Main Content-->
     <section> <p id="subheading">EN に한자じてん</p>
-      <h1><a href="<?=$this->base_url?>">英日韓 漢字 辞典</a></h1>
+      <!-- <h1><a href="<?=$this->base_url?>">英日韓 漢字 辞典</a></h1> -->
 
       <div id="search-bar">
-        <form name='search' action="<?=$this->base_url?>/search/search_result/" onsubmit="return validateForm();" method="post">
+        <!-- <form name='search' action="<?=$this->base_url?>/search/search_result/" onsubmit="return validateForm();" method="post"> -->
           <i class="fa fa-search fa-lg"></i>
           <input type="text" name="keyword" placeholder="Search...">
         </form>

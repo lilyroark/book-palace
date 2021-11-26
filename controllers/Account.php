@@ -38,7 +38,7 @@ class Account {
   public function login() {
     $error_msg = "";
     if (isset($_POST["username"])) { // check if any username is in post object
-      $data = $this->db->query("select * from user where username = ?;", "s", $_POST["username"]);
+      $data = $this->db->query("select * from user1 where username = ?;", "s", $_POST["username"]);
       if ($data === false) { // query failed
         $error_msg = "Error checking for user";
       } else if (!empty($data)) {
@@ -54,9 +54,10 @@ class Account {
       } else {
         // query succeeded but no user's found, sign up a new user
         $password = $_POST['password'];
-        if( ! preg_match( '/^(.{0,7}|[^0-9]*|[^A-Z]*|[^a-z]*|[a-zA-Z0-9]*)$/', $password)){
-          $hash = password_hash($_POST["password"], PASSWORD_DEFAULT);
-          $insert = $this->db->query("insert into user (username, password) values (?, ?);", "ss", $_POST["username"], $hash);
+        // if( ! preg_match( '/^(.{0,7}|[^0-9]*|[^A-Z]*|[^a-z]*|[a-zA-Z0-9]*)$/', $password)){
+          // $hash = password_hash($_POST["password"], PASSWORD_DEFAULT);
+          $hash = 'hi there';
+          $insert = $this->db->query("insert into user1 (username, password) values (?, ?);", "ss", $_POST["username"], $hash);
           if ($insert === false) {
             $error_msg = "Error creating new user";
           }
@@ -68,10 +69,10 @@ class Account {
           $_SESSION["user_id"] = $id;
           header("Location: {$this->base_url}/search/search_form");
           return;
-        } else{
+        // } else{
 
-          $error_msg = "Your password must have at least one upper and lowercase letter, one number, and one special character ";
-        }
+        //   $error_msg = "Your password must have at least one upper and lowercase letter, one number, and one special character ";
+        // }
       }
     }
 
