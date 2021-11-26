@@ -12,7 +12,7 @@ class Main {
   public function run($parts) {
     // break down the parsed url into page and action in the page
     $page = $parts[0];
-
+    echo $page;
     switch($page) {
     case "account":
       $this->account($parts[1]);
