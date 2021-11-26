@@ -1,8 +1,4 @@
 <?php
-/*
- * Author(s): Sehoan Choi (sc8zt), Ryu Patterson (rjp5cc)
- */
-
 class Account {
 
   private $db;
@@ -17,16 +13,21 @@ class Account {
   public function run($action) {
 
     switch($action) {
-    case "login":
-      $this->login();
-      break;
-    case "logout":
-      $this->logout();
-      break;
-    default:
-      $this->login();
+      case "login":
+        $this->login();
+        break;
+      case "logout":
+        $this->logout();
+        break;
+      case "mybooks":
+        $this->mybooks();
+        break;
+      case "friends":
+        $this->friends();
+        break;
+      default:
+        $this->login();
     }
-
   }
 
   public function login() {
@@ -70,4 +71,11 @@ class Account {
     header("Location: {$this->base_url}/"); // redirect to home page
   }
 
+  public function mybooks() {
+    include ('views/recent_search.php');
+  }
+
+  public function friends() {
+    include ('views/friends.php');
+  }
 }
