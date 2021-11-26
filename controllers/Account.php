@@ -23,12 +23,6 @@ class Account {
     case "logout":
       $this->logout();
       break;
-    case "recent_search":
-      $this->recentSearch();
-      break;
-    case "wordbook":
-      $this->wordbook();
-      break;
     default:
       $this->login();
     }
@@ -38,14 +32,13 @@ class Account {
   public function login() {
     $error_msg = "";
     if (isset($_POST["username"])) { // check if any username is in post object
-      $data = $this->db->query("select * from user where username = ?;", "s", $_POST["username"]);
+      $data = $this->db->query("select * from user1 where username = ?;", "s", $_POST["username"]);
       if ($data === false) { // query failed
         $error_msg = "Error checking for user";
       } else if (!empty($data)) {
         // query succeeded and an existing user's found, validate password
         if (password_verify($_POST["password"], $data[0]["password"])) {
           $_SESSION["username"] = $data[0]["username"];
-          $_SESSION["user_id"] = $data[0]["id"];
           header("Location: {$this->base_url}/search/search_form");
           return;
         } else {
@@ -54,24 +47,17 @@ class Account {
       } else {
         // query succeeded but no user's found, sign up a new user
         $password = $_POST['password'];
-        if( ! preg_match( '/^(.{0,7}|[^0-9]*|[^A-Z]*|[^a-z]*|[a-zA-Z0-9]*)$/', $password)){
-          $hash = password_hash($_POST["password"], PASSWORD_DEFAULT);
-          $insert = $this->db->query("insert into user (username, password) values (?, ?);", "ss", $_POST["username"], $hash);
-          if ($insert === false) {
-            $error_msg = "Error creating new user";
-          }
-
-          // create session obejcts to maintain user's state in the site
-          $_SESSION["username"] = $_POST["username"];
-          $id = $this->db->query("select max(id) from user");
-          $id = $id[0]["max(id)"];
-          $_SESSION["user_id"] = $id;
-          header("Location: {$this->base_url}/search/search_form");
-          return;
-        } else{
-
-          $error_msg = "Your password must have at least one upper and lowercase letter, one number, and one special character ";
+        $hash = password_hash($_POST["password"], PASSWORD_DEFAULT);
+        $insert = $this->db->query("insert into user2 (email_address, displayname) values (?, ?);", "ss", $_POST["email"], $_POST["dspName"]);
+        $insert &= $this->db->query("insert into user1 (username, email_address, password) values (?, ?, ?);", "sss", $_POST["username"], $_POST["email"], $hash);
+        if ($insert == false) {
+          $error_msg = "Error creating new user";
         }
+
+        // create session obejcts to maintain user's state in the site
+        $_SESSION["username"] = $_POST["username"];
+        header("Location: {$this->base_url}/search/search_form");
+        return;
       }
     }
 
@@ -84,41 +70,4 @@ class Account {
     header("Location: {$this->base_url}/"); // redirect to home page
   }
 
-  public function recentSearch() {
-    include ('views/recent_search.php');
-  }
-
-  public function wordbook() {
-    $error_msg = "";
-    // handle get request with its queries
-    if (isset($_GET["command"]) && $_GET["command"] == "delete") {
-      // delete a character from the user's wordbook
-      $delete = $this->db->query("delete from favorites where
-        user_id={$_SESSION["user_id"]} and kanji_id={$_GET["kanji_id"]};");
-      if ($delete == false) {
-        $error_msg = "Failed to delete the character";
-      }
-    }
-    // retrieve a list of letters in the user's wordbook
-    $userWordbook = $this->db->query(
-      "select * from favorites
-      inner join kanji on kanji_id=id
-      where user_id={$_SESSION["user_id"]};");
-
-    if (isset($_GET["command"]) && $_GET["command"] == "export") {
-      // export the user's wordbook in json
-      foreach ($userWordbook as $k => $row) {
-        unset($row["user_id"]);
-        unset($row["kanji_id"]);
-        unset($row["user_id"]);
-        $userWordbook[$k] = $row;
-        echo "\n";
-      }
-      $jsonReport = json_encode($userWordbook);
-      header('Content-Type: application/json; charset=utf-8');
-      echo $jsonReport;
-      return;
-    }
-    include("views/wordbook.php");
-  }
 }

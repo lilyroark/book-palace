@@ -5,7 +5,7 @@ class Config {
     private $base_url;
 
     public function __construct() {
-        $this->base_url = "ok";
+        $this->base_url = "cs4750/book-palace";
     }
 
     public function getURL() {

@@ -22,24 +22,23 @@
   <body>
   <!--Top Navigation / Header bar-->
     <header>
-      <div id="header-logo">
-        <i class="fa fa-user-circle fa-2x"></i>
-      </div>
-      <p>
-        <span class="active-lang">EN</span> |
-        <span>JP</span> |
-        <span>KR</span>
-      </p>
     </header>
     <!--Main Content-->
     <section>
-      <p id="subheading">EN に한자じてん</p>
-      <h1><a href="<?=$this->base_url?>">英日韓 漢字 辞典</a></h1>
+      <h1><a href="<?=$this->base_url?>">The Book Palace</a></h1>
 
       <form id="login_form" name='login' action="<?=$this->base_url?>/account/login/" onsubmit="return validate();" method="post">
         <div>
+          <label for="dspName">Display Name</label>
+          <input type="text" id="dspName" name="dspName"/>
+        </div>
+        <div>
           <label for="username">Username</label>
           <input type="text" id="username" name="username"/>
+        </div>
+        <div>
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email"/>
         </div>
         <div>
           <label for="password">Password</label>
@@ -50,7 +49,7 @@
         </div>
       </form>
       <p style="color: red;"><?= $error_msg ?></p>
-      <p id="welcome-msg">Search for any specific Chinese character or derived vocabulary!</p>
+      <p id="welcome-msg">Browse and checkout books!</p>
     </section>
     <!--Footer-->
     <footer>
