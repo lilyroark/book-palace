@@ -5,14 +5,16 @@
 
 class Main {
 
+  private $base_url;
   public function __construct() {
     $this->db = new Database();
+    $this->config = new Config();
+    $this->base_url = $this->config->getURL();
   }
 
   public function run($parts) {
     // break down the parsed url into page and action in the page
     $page = $parts[0];
-    echo $page;
     switch($page) {
     case "account":
       $this->account($parts[1]);
@@ -40,8 +42,7 @@ class Main {
   }
   public function search($action) {
     // forward the action to search controller
-    $search = new Search();
-    $search->run($action);
+    header("Location: $this->base_url/views/mySearch.php");
   }
   public function quiz($action) {
     // forward the action to quiz controller
