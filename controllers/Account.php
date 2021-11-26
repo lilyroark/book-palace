@@ -10,9 +10,9 @@ class Account {
     $this->base_url = $this->config->getURL();
   }
 
-  public function run($action) {
+  public function run($command) {
 
-    switch($action) {
+    switch($command) {
       case "login":
         $this->login();
         break;
@@ -72,10 +72,12 @@ class Account {
   }
 
   public function mybooks() {
-    include ('views/recent_search.php');
+    // code related to mybooks goes here
+    include ('views/mybooks.php');
   }
 
   public function friends() {
+    // code related to friends goes here
     include ('views/friends.php');
   }
 }

@@ -1,8 +1,6 @@
 <?php
 class Main {
 
-  private $base_url;
-
   public function __construct() {}
 
   public function run($page, $command) {
@@ -11,40 +9,34 @@ class Main {
         $this->account($command);
         break;
       case "search":
-        header("Location: $this->base_url/views/mySearch.php");
-        break;
-      case "mybooks":
-        header("Location: $this->base_url/MyBooks.php");
         $this->search($command);
         break;
       case "book":
         $this->book($command);
         break;
       default:
-        if (isset($_SESSION["username"])) { // user is already logged in, redirect to the search page
-          header("Location: $this->base_url/views/mySearch.php");
+        if (isset($_SESSION["username"])) {
+          $this->search("search_form");
         } else {
-          $this->account("login"); // else redirect to the login page
+          $this->account("login");
         }
     }
-
   }
 
-  public function account($action) {
-    // forward the action to account controller
+  public function account($command) {
+    // forward the command to account controller
     $account = new Account();
-    $account->run($action);
+    $account->run($command);
   }
-  public function search($action) {
-    // forward the action to search controller
+  public function search($command) {
+    // forward the command to search controller
     $search = new Search();
-    $search->run($action);
+    $search->run($command);
   }
-  public function book($action) {
-    // forward the action to quiz controller
-    $quiz = new Quiz();
-    $quiz->run($action);
-
+  public function book($command) {
+    // forward the command to quiz controller
+    $book = new Book();
+    $book->run($command);
   }
 }
 

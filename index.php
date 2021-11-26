@@ -12,18 +12,18 @@ $base_url = $config->getURL();
 
 $page = "";
 $command = "";
+
 // Parse the URL
-if (isset($_GET['page'])) {
+if (isset($_GET['page']) && isset($_GET['command'])) {
   $page = $_GET['page'];
-}
-if (isset($_GET['command'])) {
   $command = $_GET['command'];
 }
 
+// if no user is logged in, redirect to login page
 if (!isset($_SESSION["username"])) {
   $page = "account";
   $command = "login";
 }
 
 $main = new Main();
-$main->run($page, $command);
+$main->run($page, $command); // forward the query to appropriate controllers

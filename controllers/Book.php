@@ -1,9 +1,5 @@
 <?php
-/*
- * Author(s): Sehoan Choi (sc8zt)
- */
-
-class Quiz {
+class Book {
 
     private $db;
 
@@ -11,27 +7,31 @@ class Quiz {
         $this->db = new Database();
     }
 
-    public function run($action) {
-      // run appropriate actions accordingly
-        switch($action) {
-            case "quiz_form":
-                $this->quizForm();
+    public function run($command) {
+        switch($command) {
+            case "book_detail":
+                $this->bookDetail();
                 break;
-            case "flashcards":
-                $this->flashcards();
+            case "add_book":
+                $this->addBook();
+                break;
+            case "add_to_favorite":
+                $this->addToFavorite();
                 break;
             default:
-                $this->quizForm();
                 break;
         }
-
     }
 
-    public function quizForm() {
-        include("views/quiz_form.php");
+    public function bookDetail() {
+        include("views/book_detail.php");
     }
 
-    public function flashcards() {
-        include("views/flashcards.php");
+    public function addBook() {
+        include("views/addBook.php");
+    }
+
+    public function addToFavorite() {
+
     }
 }

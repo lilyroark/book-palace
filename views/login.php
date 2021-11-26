@@ -13,11 +13,6 @@
       rel="stylesheet"
       integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
       crossorigin="anonymous">
-    <link rel="stylesheet" href="<?=$this->base_url?>/styles/styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
-    <script src="https://use.fontawesome.com/0604459c37.js"></script>
   </head>
   <body>
   <!--Top Navigation / Header bar-->
@@ -60,13 +55,13 @@
       </div>
     </footer>
     <script>
-      function validate(){ //validates login form username
+      function validate() { // validates login form username
         let user = document.forms['login']['username'].value;
         var reg = new RegExp("[ -~]"); // checks all ASCii characters
-        if(!reg.test(user)){
+        if(!reg.test(user)) {
           alert("Please don't use unicode characters!!"); //non ascii characters are not allowed
           return false;
-        } else{
+        } else {
           return true;
         }
       }
