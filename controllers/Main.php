@@ -20,14 +20,14 @@ class Main {
       $this->account($parts[1]);
       break;
     case "search":
-      $this->search($parts[1]);
+      header("Location: $this->base_url/views/mySearch.php");
       break;
-    case "quiz":
-      $this->quiz($parts[1]);
+    case "mybooks":
+      header("Location: $this->base_url/MyBooks.php");
       break;
     default:
       if (isset($_SESSION["username"])) { // user is already logged in, redirect to the search page
-        $this->search("form");
+        header("Location: $this->base_url/views/mySearch.php");
       } else {
         $this->account("login"); // else redirect to the login page
       }
@@ -39,16 +39,6 @@ class Main {
     // forward the action to account controller
     $account = new Account();
     $account->run($action);
-  }
-  public function search($action) {
-    // forward the action to search controller
-    header("Location: $this->base_url/views/mySearch.php");
-  }
-  public function quiz($action) {
-    // forward the action to quiz controller
-    $quiz = new Quiz();
-    $quiz->run($action);
-
   }
 }
 
