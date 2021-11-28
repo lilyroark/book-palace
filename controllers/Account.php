@@ -25,6 +25,9 @@ class Account {
       case "friends":
         $this->friends();
         break;
+      case "add_friends":
+        $this->addFriends();
+        break;
       default:
         $this->login();
     }
@@ -40,7 +43,7 @@ class Account {
         // query succeeded and an existing user's found, validate password
         if (password_verify($_POST["password"], $data[0]["password"])) {
           $_SESSION["username"] = $data[0]["username"];
-          header("Location: {$this->base_url}/search/search_form");
+          header("Location: {$this->base_url}?page=search&command=search_form");
           return;
         } else {
           $error_msg = "Invalid Password";
@@ -57,7 +60,7 @@ class Account {
 
         // create session obejcts to maintain user's state in the site
         $_SESSION["username"] = $_POST["username"];
-        header("Location: {$this->base_url}/search/search_form");
+        header("Location: {$this->base_url}?page=search&command=search_form");
         return;
       }
     }
@@ -77,7 +80,29 @@ class Account {
   }
 
   public function friends() {
-    // code related to friends goes here
+    $friends = $this->db->query("select friend_username from friends where username = ?;", "s", $_SESSION["username"]);
+    if (empty($friends)) {
+      $friends = ["No Friend"];
+    }
     include ('views/friends.php');
+  }
+
+  public function addFriends() {
+    $search_result = [];
+    if (isset($_POST["keyword"])) {
+      $keyword = "%" . $_POST["keyword"] . "%";
+      $search_result = $this->db->query("select displayname, email_address from user2 where displayname like ? or email_address like ?;", "ss", $keyword, $keyword);
+    }
+
+    if (isset($_GET["name"])) {
+      $displayName = $_GET["name"];
+      $friendUsername = $this->db->query("select username from user1 natural join user2 where displayname = ?;", "s", $displayName);
+      // print_r($friendUsername);
+      $insert = $this->db->query("insert into friends (username, friend_username) values (?, ?);", "ss", $_SESSION["username"], $friendUsername[0]["username"]);
+      if ($insert == false) {
+        $error_msg = "Error creating new user";
+      }
+    }
+    include ('views/add_friends.php');
   }
 }

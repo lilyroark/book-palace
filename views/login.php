@@ -22,7 +22,7 @@
     <section>
       <h1><a href="<?=$this->base_url?>">The Book Palace</a></h1>
 
-      <form id="login_form" name='login' action="<?=$this->base_url?>/account/login/" onsubmit="return validate();" method="post">
+      <form id="login_form" name='login' action="<?=$this->base_url?>/index.php?page=account&command=login" onsubmit="return validate();" method="post">
         <div>
           <label for="dspName">Display Name</label>
           <input type="text" id="dspName" name="dspName"/>

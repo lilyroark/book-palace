@@ -2,14 +2,17 @@
 
 class Config {
 
-    private $base_url;
+  private $base_url;
 
-    public function __construct() {
-        $this->base_url = "http://localhost:81/cs4750/book-palace";
-        //Changed base url for local development "cs4750/book-palace";
-    }
+  public function __construct() {
+    $compId = "sc8zt";
+    $project_name = "book_palace";
+    //Changed base url for local development "cs4750/book-palace";
+    // $this->base_url = "http://localhost:81/cs4750/book-palace";
+    $this->base_url = "/" . $compId . "/" . $project_name;
+  }
 
-    public function getURL() {
-        return $this->base_url;
-    }
+  public function getURL() {
+    return $this->base_url;
+  }
 }

@@ -27,16 +27,34 @@
     </header>
     <!--Main Content-->
     <section>
+      <a href="<?=$this->base_url?>/index.php?page=account&command=friends">Return to list</a>
+      <form action="" method="POST">
+        <div>
+          <label for="dspName">Add a new friend to the list below by searching with a display name or an email</label>
+          <input type="text" id="keyword" name="keyword"/>
+        </div>
+        <div>
+          <button type="submit">Search</button>
+        </div>
+      </form>
       <div id="content">
-      <a href="<?=$this->base_url?>/index.php?page=account&command=add_friends">Add new friend</a>
         <ul>
-        <?php
-        foreach ($friends as $friend) {
-        ?>
-          <li><?=$friend["friend_username"]?></li>
-        <?php
-        }
-        ?>
+          <?php
+          foreach ($search_result as $pair) {
+          ?>
+          <li>
+          <?php
+            foreach ($pair as $attr => $value) {
+          ?>
+            <p><?=$attr?>: <?=$value?></p>
+          <?php
+            }
+          ?>
+            <a href="<?=$this->base_url?>/index.php?page=account&command=add_friends&name=<?=$pair["displayname"]?>">Add</a>
+          </li>
+          <?php
+          }
+          ?>
         </ul>
       </div>
     </section>
