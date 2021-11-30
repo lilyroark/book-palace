@@ -1,0 +1,24 @@
+body {
+  font-family: 'Playfair Display', serif;
+}
+:root {
+  --dark-theme-color: #8B6E2B;
+  --medium-theme-color: #BC8810;
+  --light-theme-color: rgba(188,136,16,0.53);
+}
+
+.nav-item {
+  margin-left: 2rem;
+}
+.nav-link {
+  color: var(--light-theme-color) !important;
+  font-family: 'Roboto', light;
+  font-size: 1.4rem;
+}
+.dropdown-menu .dropdown-item {
+  color: var(--medium-theme-color) !important;
+}
+
+.list-group-item {
+  color: var(--medium-theme-color);
+}

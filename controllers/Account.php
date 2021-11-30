@@ -81,9 +81,6 @@ class Account {
 
   public function friends() {
     $friends = $this->db->query("select friend_username from friends where username = ?;", "s", $_SESSION["username"]);
-    if (empty($friends)) {
-      $friends = ["No Friend"];
-    }
     include ('views/friends.php');
   }
 
@@ -102,6 +99,7 @@ class Account {
       if ($insert == false) {
         $error_msg = "Error creating new user";
       }
+      header("Location: {$this->base_url}?page=account&command=friends");
     }
     include ('views/add_friends.php');
   }

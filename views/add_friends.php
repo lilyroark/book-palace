@@ -1,62 +1,64 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Book Palace</title>
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="author" content="Sehoan (Mike) Choi">
-    <meta name="description" content="friends list">
-    <meta name="keywords" content="friends">
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-      crossorigin="anonymous">
-  </head>
-  <body>
-  <!--Top Navigation / Header bar-->
-    <header>
-      <h1>The Book Palace</h1>
-      <nav>
-        <li>Home</li>
-        <li>My Books</li>
-        <li>Add New Book</li>
-        <li>By Popularity</li>
-      </nav>
-    </header>
-    <!--Main Content-->
-    <section>
-      <a href="<?=$this->base_url?>/index.php?page=account&command=friends">Return to list</a>
-      <form action="" method="POST">
-        <div>
-          <label for="dspName">Add a new friend to the list below by searching with a display name or an email</label>
-          <input type="text" id="keyword" name="keyword"/>
-        </div>
-        <div>
-          <button type="submit">Search</button>
-        </div>
-      </form>
-      <div id="content">
-        <ul>
-          <?php
-          foreach ($search_result as $pair) {
-          ?>
-          <li>
-          <?php
-            foreach ($pair as $attr => $value) {
-          ?>
-            <p><?=$attr?>: <?=$value?></p>
-          <?php
-            }
-          ?>
-            <a href="<?=$this->base_url?>/index.php?page=account&command=add_friends&name=<?=$pair["displayname"]?>">Add</a>
+<?php include ('views/header.php'); ?>
+
+<header>
+  <nav class="navbar navbar-expand-lg navbar-light p-3">
+    <div class="container-fluid">
+      <a class="navbar-brand fs-2" href="<?=$this->base_url?>" style="color: var(--dark-theme-color)">The Book Palace</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenus" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarMenus">
+        <ul class="navbar-nav pe-4">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="<?=$this->base_url?>">Home</a>
           </li>
-          <?php
-          }
-          ?>
-        </ul>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Personal
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="<?=$this->base_url?>/index.php?page=account&command=mybooks">My Books</a></li>
+              <li><a class="dropdown-item" href="<?=$this->base_url?>/index.php?page=account&command=friends">My Friends</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Add New Book</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">By Popularity</a>
+          </li>
+        </ul
       </div>
-    </section>
-  </body>
-</html>
+    </div>
+  </nav>
+</header>
+<section class="container mt-3">
+  <h2 class="pb-3 w-50 border-bottom border-3 fit-content" style="color: var(--medium-theme-color);border-color: var(--light-theme-color) !important;">Search/Add Friend</h2>
+
+  <form action="" method="POST">
+    <div class="row p-4">
+      <input class="col-4 form-control w-25" type="text" id="keyword" name="keyword"/>
+      <button class="col-1 mx-4 btn btn-primary" type="submit">Search</button>
+      <a class="col-2 btn btn-warning" href="<?=$this->base_url?>/index.php?page=account&command=friends">Return to list</a>
+      <label for="dspName" class="form-text">Add a new friend to the list below by searching with a display name or an email</label>
+    </div>
+    <div>
+    </div>
+  </form>
+  <div class="ps-2">
+    <ul class="list-group">
+<?php
+foreach ($search_result as $pair) {
+  echo "<li class='list-group-item w-50 d-flex align-items-center justify-content-between'>";
+  foreach ($pair as $attr => $value) {
+    echo "<p>{$value}</p>";
+  }
+  echo "<a class='badge btn btn-dark' href='{$this->base_url}/index.php?page=account&command=add_friends&name={$pair['displayname']}'> Add </a>";
+  echo "</li>";
+}
+?>
+    </ul>
+  </div>
+</section>
+
+<?php include ('views/footer.php'); ?>
