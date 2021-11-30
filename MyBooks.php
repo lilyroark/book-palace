@@ -70,19 +70,15 @@ if(isset($_POST["bookName"]) and isset($_POST["bookAuthor"]) and isset($_POST["b
   $add_checkout_stmt = $db->prepare("insert into checks_out1(username, isbn, date) values (?,?,?)");
   $datetoday = date("Y-m-d");
   $add_checkout_stmt->bind_param("sss", $user["username"], $bookisbn , $datetoday);
-
-
-  $add_book2_stmt->execute();
-  $add_book1_stmt->execute();
-  $add_author_stmt->execute();
-  $add_writes_stmt->execute();
-  $add_checkout_stmt->execute();
-  //$user["username"]
-  // insert into website database
-  //$add_book_stmt = $db->prepare("insert into book1 (isbn, title, available_count, published_date) values (?,?,?,?);");
-  //$count = 0;
-  //$add_book_stmt->bind_param("ssis", $_POST["bookISBN"], $_POST["bookName"], $count, str_to_date($_POST["bookdate"],'%m-%d-%Y'));
-  //
+  
+  //if(preg_match('/^\w+@virginia\.edu$/i', $user["email"]) > 0){
+      $add_book2_stmt->execute();
+      $add_book1_stmt->execute();
+      $add_author_stmt->execute();
+      $add_writes_stmt->execute();
+      $add_checkout_stmt->execute();
+  //}
+  //else {echo "You don't have administrative privilige";}
 }
 
 ?>
