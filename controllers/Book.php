@@ -21,6 +21,8 @@ class Book {
     case "add_favorite":
       $this->addFavorite();
       break;
+    case "add_book":
+      $this->addBook();
     default:
       break;
     }
@@ -59,5 +61,33 @@ class Book {
       }
       header("Location: {$this->base_url}?page=account&command=mybooks");
     }
+  }
+  public function addBook() {
+    if(isset($_POST["bookName"]) and isset($_POST["bookAuthor"]) and isset($_POST["bookISBN"]) and isset($_POST["bookDate"]) and isset($_POST["bookGenre"])  ){
+      $user = $_SESSION["username"];
+      $bookname = $_POST["bookName"];
+      $bookauthor = $_POST["bookAuthor"];
+      $bookisbn = $_POST["bookISBN"];
+      $date = $_POST["bookDate"];
+      $count = 1;
+      $genre = $_POST["bookGenre"];
+      $datetoday = date("Y-m-d");
+      $bookauthorbday = "0001-01-01";  
+      $useremail = $this->db->query("select email_address from user1 where username = ?;","s", $user)[0]["email_address"];      ;
+
+
+      if(preg_match('/^\w+@virginia\.edu$/i', $useremail) > 0){
+      $add_book2_stmt = $this->db->query("INSERT INTO book2 (title, published_date,genre) VALUES (?,?,?)", "sss", $bookname, $date, $genre);  
+      $add_book1_stmt = $this->db->query("INSERT INTO book1 (isbn, title, available_count, published_date) VALUES (?,?,?,?)", "ssis", $bookisbn, $bookname, $count, $date);    
+      $add_author_stmt = $this->db->query("INSERT INTO author (name, birthday, primary_genre) VALUES (?,?,?)", "sss", $bookauthor, $bookauthorbday , $genre);    
+      $add_writes_stmt = $this->db->query("INSERT INTO writes (author_name, author_birthday, isbn) VALUES (?,?,?)","sss", $bookauthor, $bookauthorbday , $bookisbn);    
+      $add_checkout_stmt = $this->db->query("INSERT INTO checks_out1(username, isbn, date) VALUES (?,?,?)", "sss", $user, $bookisbn , $datetoday);
+      }
+      else {echo "You don't have administrative privilige";}
+      header("Location: {$this->base_url}");
+    }
+    
+    include ('views/mybooks.php');
+    header("Location: {$this->base_url}?page=account&command=mybooks");
   }
 }

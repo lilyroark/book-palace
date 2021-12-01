@@ -67,25 +67,25 @@
                 <h5 class="modal-title" id="addBookModalToggleLabel">Add Book</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
-              <form method="POST" action="./MyBooks.php">
+              <form method="post" action="<?=$this->base_url?>/index.php?page=book&command=add_book">
                 <div class="modal-body">
                   <div class="row">
                     <div class="col-md-7">
                       <div class="mb-3">
-                        <label for="bookNameFormLabel" class="form-label">Book Name</label>
-                        <input type="text" name="bookName" class="form-control" id="bookNameormLabel" placeholder="Book Name"
+                        <label for="bookName" class="form-label">Book Name</label>
+                        <input type="text" name="bookName" class="form-control" id="bookName" placeholder="Book Name"
                           required>
-                          <label for="bookISBNFormLabel" class="form-label">Book ISBN</label>
-                        <input type="text" name="bookISBN" class="form-control" id="bookISBNFormLabel" placeholder="Book ISBN"
+                          <label for="bookISBN" class="form-label">Book ISBN</label>
+                        <input type="text" name="bookISBN" class="form-control" id="bookISBN" placeholder="Book ISBN"
                           required>
-                          <label for="bookAuthorFormLabel" class="form-label">Book Author</label>
-                        <input type="text" name="bookAuthor" class="form-control" id="bookAuthorFormLabel" placeholder="Book Author"
+                          <label for="bookAuthor" class="form-label">Book Author</label>
+                        <input type="text" name="bookAuthor" class="form-control" id="bookAuthor" placeholder="Book Author"
                           required>
-                          <label for="bookDateFormLabel" class="form-label">Book Publishing Date</label>
-                        <input type="date" name="bookDate" class="form-control" id="bookDateFormLabel" placeholder="Book Date"
+                          <label for="bookDate" class="form-label">Book Publishing Date</label>
+                        <input type="date" name="bookDate" class="form-control" id="bookDate" placeholder="Book Date"
                           required>
-                          <label for="bookGenreFormLabel" class="form-label">Book Genre</label>
-                        <input type="text" name="bookGenre" class="form-control" id="bookGenreFormLabel" placeholder="Book Genre"
+                          <label for="bookGenre" class="form-label">Book Genre</label>
+                        <input type="text" name="bookGenre" class="form-control" id="bookGenre" placeholder="Book Genre"
                           required>
                       </div>
                     </div>
