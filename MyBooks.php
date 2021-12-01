@@ -27,7 +27,7 @@ $user = null;
 $get_useremail = $db->prepare("select email_address from user1 where username = ?;");
 $get_useremail->bind_param("s", $username);
 if (!$get_useremail->execute()) {
-  $error_msg = "Error: User could not be found";
+  $error_msg = "Error: User could not be found ";
 }
 $get_useremail_data = $get_useremail->get_result()->fetch_all(MYSQLI_ASSOC);
 
