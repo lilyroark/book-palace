@@ -64,7 +64,7 @@ class Account {
         return;
       }
     }
-
+ 
     include "views/login.php";
   }
 

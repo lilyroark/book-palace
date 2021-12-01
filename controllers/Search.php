@@ -32,7 +32,7 @@ class Search {
     if (isset($_POST["keyword"])) {
       $keyword = $_POST["keyword"];
       $filter = "%" . $keyword . "%";
-      $available_only = isset($_POST["available_only"]);
+      $available_only = isset($_POST["available_only"]); 
 
       if ($available_only) {
         $search_result = $this->db->query("select * from book1 where title like ? and available_count > 0;", "s", $filter);

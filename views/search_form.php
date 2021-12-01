@@ -54,6 +54,7 @@
     <div class="col-10 row justify-content-between" id='search_results'>
     <?php
     foreach($search_result as $book) {
+      $isbn = $book["isbn"];
       echo "
           <div class='card col-4 mb-2' style='width: 18rem;'>
             <div class='card-body'>
@@ -63,7 +64,7 @@
                 published date: {$book["isbn"]}</br>
                 available count: {$book["available_count"]}
               </p>
-              <a href='{$this->base_url}/index.php?page=book&command=book_detail' class='card-link' style='color: var(--medium-theme-color)'>Detail</a>
+              <a href='{$this->base_url}/index.php?page=book&command=book_detail&book={$isbn}' class='card-link' style='color: var(--medium-theme-color)'>Detail</a>
             </div>
           </div>
       ";
