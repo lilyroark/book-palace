@@ -39,11 +39,13 @@ class Book {
             $book_result1 = $this->db->query("select * from book1 where isbn=?;","s",$_GET["book"])[0];
             $book_result2 = $this->db->query("select * from book2 where title=? and published_date=?;","ss",$book_result1["title"],$book_result1["published_date"])[0];
             $author = $this->db->query("select * from writes where isbn=?;","s",$_GET["book"])[0];
+            $reviews = $this->db->query("select * from (review1 natural join review2) where isbn=?;", "s", $_GET["book"]);
             include("views/book_detail.php");  
         } else {
             header("Location: {$this->base_url}?page=search&command=search_form");
         }
     }
+
 
     public function addToFavorite() {
 

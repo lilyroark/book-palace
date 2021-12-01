@@ -16,6 +16,25 @@
         <button type="button" id="checkout">Check out</button>
         <button type="button" id="review">Rate/Review</button>
     </section>
+    <section class="container mt-3 d-flex flex-column">
+        <h1>Reviews</h1>
+        <?php 
+        foreach ($reviews as $review) {
+            echo "
+                <div class='card col-4 mb-2' style='width: 18rem;'>
+                    <div class='card-body'>
+                    <h5 class='card-title'>{$review['username']}</h5>
+                    <h6 class='card-subtitle mb-2 text-muted'>{$review['date']}</h6>
+                    <h6 class='card-subtitle mb-2 text-muted'>Rating: {$review['rating']}</h6>
+                    <p class='card-text'>
+                        Comment: {$review['comments']}
+                    </p>
+                    </div>
+                </div>
+            ";
+        }
+        ?>
+    </section>
 
 </section>
 <script>
