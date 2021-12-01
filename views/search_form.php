@@ -102,6 +102,9 @@ function addFav(x){
 
          }); 
   }
+  function sayHi(){
+    console.log("saying hi was called!");
+  }
   function increment() {
     console.log(page);
     var currPage =document.getElementById('search_results').innerHTML

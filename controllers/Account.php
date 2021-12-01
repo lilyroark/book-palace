@@ -28,6 +28,12 @@ class Account {
       case "add_friends":
         $this->addFriends();
         break;
+      case "reviews":
+        $this->reviews();
+        break;
+      case "add_reviews":
+        $this->addReviews();
+        break;
       default:
         $this->login();
     }
@@ -77,6 +83,31 @@ class Account {
   public function mybooks() {
     // code related to mybooks goes here
     include ('views/mybooks.php');
+  }
+
+  public function reviews() {
+    $reviews = $this->db->query("select isbn, date, rating from review1 where username = ?;", "s", $_SESSION["username"]);
+    include ('views/myreviews.php');
+  }
+
+  public function addReviews() {
+    $search_result = [];
+    if (isset($_POST["keyword"])) {
+      $keyword = "%" . $_POST["keyword"] . "%";
+      $search_result = $this->db->query("select displayname, email_address from user2 where username like ? and isbn like ?;", "ss", $keyword, $keyword);
+    }
+
+    if (isset($_GET["name"])) {
+      $displayName = $_GET["name"];
+      $friendUsername = $this->db->query("select username from user1 natural join user2 where displayname = ?;", "s", $displayName);
+      // print_r($friendUsername);
+      $insert = $this->db->query("insert into friends (username, friend_username) values (?, ?);", "ss", $_SESSION["username"], $friendUsername[0]["username"]);
+      if ($insert == false) {
+        $error_msg = "Error creating new user";
+      }
+      header("Location: {$this->base_url}?page=account&command=friends");
+    }
+    include ('views/add_reviews.php');
   }
 
   public function friends() {

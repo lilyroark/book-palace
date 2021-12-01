@@ -75,7 +75,7 @@ if($page > 0){
                 if($isFav == 1){
                     echo '
                     <div class="col-lg-4">
-                        <div class="card mx-auto" style="width: 100%; margin: 1rem; radius: 1rem" id="class-card">
+                        <div class="card mx-auto" onclick="sayHi()" style="width: 100%; margin: 1rem; radius: 1rem" id="class-card">
                             <div class="card-header header">
                                 <h5 class="class-name">'.$row['title'].'</h5>
                                 <input type="checkbox" checked="true" onclick="addFav(this)"  style="float:right"  value='.$row['isbn'].'>

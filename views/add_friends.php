@@ -17,8 +17,9 @@
               Personal
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="<?=$this->base_url?>/index.php?page=account&command=mybooks">My Books</a></li>
+            <li><a class="dropdown-item" href="<?=$this->base_url?>/index.php?page=account&command=mybooks">My Books</a></li>
               <li><a class="dropdown-item" href="<?=$this->base_url?>/index.php?page=account&command=friends">My Friends</a></li>
+              <li><a class="dropdown-item" href="<?=$this->base_url?>/index.php?page=account&command=reviews">My Reviews</a></li>
             </ul>
           </li>
           <li class="nav-item">

@@ -17,7 +17,7 @@
               Personal
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="<?=$this->base_url?>/index.php?page=account&command=mybooks">My Books</a></li>
+            <li><a class="dropdown-item" href="<?=$this->base_url?>/index.php?page=account&command=mybooks">My Books</a></li>
               <li><a class="dropdown-item" href="<?=$this->base_url?>/index.php?page=account&command=friends">My Friends</a></li>
               <li><a class="dropdown-item" href="<?=$this->base_url?>/index.php?page=account&command=reviews">My Reviews</a></li>
             </ul>
@@ -34,20 +34,33 @@
   </nav>
 </header>
 <section class="container mt-3">
-  <h2 class="pb-3 w-50 border-bottom border-3 fit-content" style="color: var(--medium-theme-color);border-color: var(--light-theme-color) !important;">My Friends</h2>
-  <div>
-    <ul class="list-group list-group-flush w-25 p-3">
-    <?php
-    if (empty($friends)) {
-      echo "<p class='list-group-item'>No Friend</p>";
-    } else {
-      foreach ($friends as $friend) {
-        echo "<a class='list-group-item list-group-item-action'>{$friend['friend_username']}</a>";
-      }
-    }
-    ?>
+  <h2 class="pb-3 w-50 border-bottom border-3 fit-content" style="color: var(--medium-theme-color);border-color: var(--light-theme-color) !important;">Search/Add Friend</h2>
+
+  <form action="" method="POST" class="row p-4">
+    
+      <input class="col-4 form-control w-25" type="text" id="comment" name="comment"> Comment </input><br>
+      <input class="col-4 form-control w-25" type="text" id="rating" name="rating">Rating</input><br>
+      <input class="col-4 form-control w-25" type="text" id="isbn" name="isbn">ISBN</input>
+      <button class="col-1 mx-4 btn btn-primary" type="submit">Add</button>
+      <!-- <a class="col-2 btn btn-warning" href="<?=$this->base_url?>/index.php?page=account&command=reviewss">Return to list</a> -->
+      <label for="dspName" class="form-text">Add a new review to the list below</label>
+
+    <div>
+    </div>
+  </form>
+  <div class="ps-2">
+    <ul class="list-group">
+<?php
+foreach ($search_result as $pair) {
+  echo "<li class='list-group-item w-50 d-flex align-items-center justify-content-between'>";
+  foreach ($pair as $attr => $value) {
+    echo "<p>{$value}</p>";
+  }
+  echo "<a class='badge btn btn-dark' href='{$this->base_url}/index.php?page=account&command=add_friends&name={$pair['displayname']}'> Add </a>";
+  echo "</li>";
+}
+?>
     </ul>
-    <a class="btn btn-dark mt-2" href="<?=$this->base_url?>/index.php?page=account&command=add_friends">Add new friend</a>
   </div>
 </section>
 
