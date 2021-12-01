@@ -10,7 +10,8 @@
         <p><?=$book_result1["available_count"]?> available</p>
     </section>
     <section class="container mt-3 d-flex flex-column">
-        <button type="button" id="edit">Edit</button>
+        <button type="button" id="edit"><a 
+        href="<?=$this->base_url?>/index.php?page=book&command=edit_book&book=<?=$isbn?>">Edit</a></button>
         <button type="button" id="remove"><a 
         href="<?=$this->base_url?>/index.php?page=book&command=remove_book&book=<?=$isbn?>">Remove Book</a></button>
         <button type="button" id="checkout">Check out</button>
