@@ -1,5 +1,5 @@
 <?php
-include_once("../controllers/database_connection.php"); 
+include_once("../database_connection.php"); 
 //  add to favorites needs users, add to checkout
 
  $con = new mysqli($dbserver, $dbuser, $dbpass, $dbdatabase);
