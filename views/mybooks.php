@@ -2,7 +2,7 @@
 
 <section class="container mt-3">
   <h2 class="pb-3 w-50 border-bottom border-3 fit-content" style="color: var(--medium-theme-color);border-color: var(--light-theme-color) !important;">My Books</h2>
-  <div class="mt-5 d-flex">
+  <div class="mt-5 d-flex flex-wrap">
     <?php
     if (empty($mybooks)) {
       echo "No Book";

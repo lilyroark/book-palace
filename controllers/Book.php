@@ -54,6 +54,7 @@ class Book {
       $isbn = $_GET["book"];
       $user = $_SESSION["username"];
       $this->db->query("insert into favorites(username, isbn) values (?, ?);", "ss", $user, $isbn);
+      header("Location: {$this->base_url}?page=account&command=mybooks");
     }
   }
 }

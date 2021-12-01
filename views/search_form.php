@@ -11,10 +11,6 @@
 
         <input class="form-control w-75 me-3" type="text" name="keyword" id="keyword" style="border-color: var(--light-theme-color);color: var(--dark-theme-color)">
 
-        <!-- Search Authors    : <input type="text" name="keyword" id="keyword"> -->
-        <!-- Display Name: <input type="text" name="displayName">
-        Last Name: <input type="text" name="password">
-        Age: <input type="text" name="email"> -->
         <input class="btn btn-dark" type="submit" value="Search"/>
       </div>
       <div class="d-flex justify-content-end mt-2">
@@ -78,126 +74,6 @@
     </div>
   </div>
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-
-<script type="text/javascript">
-var page=1;
-
-// add favorites and list favorite view, copy setup or areeba;s displays, select by author
-var searchBy = $('input[name=by]:checked').val();
-var input = $('#keyword').val();
-var available = document.getElementById('available_only').checked;
-
-function addFav(x){
-  var isbn = x.value;
-  var username ="AbelMaclead";
-  console.log(x.checked);
-  $.post('../controllers/addFavorite.php',{checked:x.checked,isbn:isbn, username:username}, function(data){
-    // $("#search_results").html(data);
-    console.log(data);
-    console.log("returned");
-
-           }); 
-    }
-    function increment() {
-      console.log(page);
-      var currPage =document.getElementById('search_results').innerHTML
-        // console.log(currPage);
-        // document.getElementById("button_results").innerHTML = page+1;
-        page = page +1
-        var username ="AbelMaclead";
-
-
-
-      console.log(searchBy);
-      console.log(available);
-      $.post('../controllers/mySearchAction.php',{username:username,searchBy:searchBy, input:input, available:available, page:page}, function(data){
-        $("#search_results").html(data);
-        var newPage =document.getElementById('search_results').innerHTML
-          //  console.log("new data");
-          //  console.log(data);
-          if(currPage ==newPage){
-            page = page -1           }
-              //  page=data
-           });      
-      };
-
-      function increment5() {
-        console.log(page);
-        // document.getElementById("button_results").innerHTML = page+5;
-        var currPage =document.getElementById('search_results').innerHTML
-          page = page +5
-          var username ="AbelMaclead";
-
-        $.post('../controllers/mySearchAction.php',{username:username,searchBy:searchBy,available:available,input:input, page:page}, function(data, data2){
-          $("#search_results").html(data);
-          var newPage =document.getElementById('search_results').innerHTML
-            //  var a = JSON.parse(data);
-            if(currPage ==newPage){
-              console.log("same stuff");
-              page = page -5           }
-              //  page=data
-           });      
-      };
-      function decrement() {
-        var username ="AbelMaclead";
-        console.log(page);
-        var currPage =document.getElementById('search_results').innerHTML.replace(/&amp;/g, "&")
-          // document.getElementById("button_results").innerHTML = page-1;
-          page = page -1
-          if(page <1){
-            page=1
-      }
-      // console.log(page);
-
-
-           $.post('../controllers/mySearchAction.php',{username:username,searchBy:searchBy,available:available,input:input, page:page}, function(data){
-             $("#search_results").html(data);
-             //  page=data
-           });
-      };
-      function decrement5() {
-        var username ="AbelMaclead";
-        console.log(page)
-          var currPage =document.getElementById('search_results').innerHTML.replace(/&amp;/g, "&")
-          // document.getElementById("button_results").innerHTML = page-5;
-          page = page -5
-          if(page <1){
-            page=1
-      }
-
-
-           $.post('../controllers/mySearchAction.php',{username:username,searchBy:searchBy,available:available,input:input, page:page}, function(data){
-             $("#search_results").html(data);
-             //  page=data
-           });
-      };
-
-      $(document).ready(function(){
-        var input = "";
-        var page=1
-          var username ="AbelMaclead";
-        $.post('../controllers/mySearchAction.php',{username:username,searchBy:searchBy,available:available,input:input, page:page}, function(data){
-          $("#search_results").html(data);
-           });
-           return false;
-      });
-
-      /*
-       * $(function () {
-       *   $("#search-form").bind('submit',function() {
-       *     input = $('#keyword').val();
-       *     available = document.getElementById('available_only').checked;
-       *     searchBy = $('input[name=by]:checked').val()
-       *       var page=1;
-       *     var username ="AbelMaclead";
-       *     $.post('../controllers/mySearchAction.php',{username:username,searchBy:searchBy,available:available,input:input, page:page}, function(data){
-       *       $("#search_results").html(data);
-       *      });
-       *      return false;
-       *   });
-       * });
-       */
-  </script>
 </section>
 
 <?php include ('views/footer.php'); ?>
