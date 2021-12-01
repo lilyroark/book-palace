@@ -48,12 +48,15 @@ class Book {
       header("Location: {$this->base_url}?page=search&command=search_form");
     }
   }
-
+  
   public function addFavorite() {
     if (isset($_GET["book"])) {
-      $isbn = $_GET["book"];
-      $user = $_SESSION["username"];
-      $this->db->query("insert into favorites(username, isbn) values (?, ?);", "ss", $user, $isbn);
+      $book = $_GET["book"];
+      try{
+        $insert = $this->db->query("INSERT INTO favorites(username, isbn) VALUES (?, ?)", "ss", $_SESSION['username'], $book);
+      }catch(Exception $e){ //if it's already in list of favorites do nothing
+
+      }
       header("Location: {$this->base_url}?page=account&command=mybooks");
     }
   }

@@ -14,7 +14,7 @@
                 <h5 class='card-title'>{$book["title"]}
                 <h6 class='card-subtitle mb-2 text-muted'>ISBN: {$book["isbn"]}</h6>
                 <p class='card-text'>
-                  published date: {$book["isbn"]}</br>
+                  published date: {$book["published_date"]}</br>
                   available count: {$book["available_count"]}
                 </p>
                 <a href='{$this->base_url}/index.php?page=book&command=book_detail&book={$book["isbn"]}' class='card-link' style='color: var(--medium-theme-color)'>Detail</a>
