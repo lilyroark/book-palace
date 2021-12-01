@@ -53,21 +53,26 @@
     </div>
     <div class="col-10 row justify-content-between" id='search_results'>
     <?php
-    foreach($search_result as $book) {
-      $isbn = $book["isbn"];
-      echo "
-          <div class='card col-4 mb-2' style='width: 18rem;'>
-            <div class='card-body'>
-              <h5 class='card-title'>{$book["title"]}</h5>
-              <h6 class='card-subtitle mb-2 text-muted'>ISBN: {$book["isbn"]}</h6>
-              <p class='card-text'>
-                published date: {$book["isbn"]}</br>
-                available count: {$book["available_count"]}
-              </p>
-              <a href='{$this->base_url}/index.php?page=book&command=book_detail&book={$isbn}' class='card-link' style='color: var(--medium-theme-color)'>Detail</a>
+    if (empty($search_result)) {
+      echo "<p>No Result found</p>";
+    } else {
+      foreach($search_result as $book) {
+        $isbn = $book["isbn"];
+        echo "
+            <div class='card col-4 mb-3' style='width: 18rem;'>
+              <div class='card-body'>
+                <h5 class='card-title'>{$book["title"]}</h5>
+                <h6 class='card-subtitle mb-2 text-muted'>ISBN: {$book["isbn"]}</h6>
+                <p class='card-text'>
+                  published date: {$book["isbn"]}</br>
+                  available count: {$book["available_count"]}
+                </p>
+                <a href='{$this->base_url}/index.php?page=book&command=book_detail&book={$isbn}' class='card-link' style='color: var(--medium-theme-color)'>Detail</a>
+                <a href='{$this->base_url}/index.php?page=book&command=add_favorite&book={$isbn}' class='card-link' style='color: var(--medium-theme-color)'>Add to Mybooks</a>
+              </div>
             </div>
-          </div>
-      ";
+        ";
+      }
     }
     ?>
     </div>
