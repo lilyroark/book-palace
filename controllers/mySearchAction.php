@@ -2,7 +2,6 @@
 <?php
 include_once("../database_connection.php"); 
 //  add to favorites needs users, add to checkout
-
  $con = new mysqli($dbserver, $dbuser, $dbpass, $dbdatabase);
  $user = $_POST['username'];
  // Check connection
@@ -154,7 +153,7 @@ if($page > 0){
             }
         }
     }
-}
+}echo "hi";
 
  mysqli_close($con);
 ?>

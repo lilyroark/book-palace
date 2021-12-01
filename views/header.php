@@ -39,6 +39,7 @@
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li><a class="dropdown-item" href="<?=$this->base_url?>/index.php?page=account&command=mybooks">My Books</a></li>
                 <li><a class="dropdown-item" href="<?=$this->base_url?>/index.php?page=account&command=friends">My Friends</a></li>
+                <li><a class="dropdown-item" href="<?=$this->base_url?>/index.php?page=account&command=checkedout">Checked Out</a></li>
                 <li><a class="dropdown-item" href="<?=$this->base_url?>/index.php?page=account&command=logout">Log Out</a></li>
               </ul>
             </li>

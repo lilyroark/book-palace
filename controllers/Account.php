@@ -28,6 +28,15 @@ class Account {
       case "add_friends":
         $this->addFriends();
         break;
+      case "add_reviews":
+        $this->addReviews();
+        break;
+      case "remove_favorite":
+        $this->removeFav();
+        break;
+      case "add_favorite":
+        $this->addFav();
+        break;
       default:
         $this->login();
     }
@@ -103,5 +112,75 @@ class Account {
       header("Location: {$this->base_url}?page=account&command=friends");
     }
     include ('views/add_friends.php');
+  }
+
+  public function addReviews() {
+    $search_result = [];
+    $second = [];
+    $num_reviews =0;
+    $isbn =  $_GET["name"];
+      $user = $_SESSION['username'];
+    $review1 = $this->db->query("Select date, rating from review1 where username=? and isbn=?", "ss", $user, $isbn);
+    $review2 = $this->db->query("Select comments from review2 where username=? and isbn=?", "ss", $user, $isbn);
+    if(sizeof($review1) >0){
+      $review1 = end($review1);
+      $review2= $review2[0];
+    }else{
+      $review1 = array(
+        'date' => '',
+        'rating' => ''
+    );
+    $review2 = array(
+      'comments' => ''
+  );
+    }
+    
+    $book = $this->db->query("Select title from book1 where isbn=?", "s", $isbn);
+    if (isset($_POST["comments"]) && isset($_POST["date"]) && isset($_POST["rating"])) {
+      $rating =$_POST["rating"];
+      $comments =$_POST["comments"];
+      $date = date("Y-m-d", strtotime($_POST["date"])) ;
+      
+     
+      try{ #“Call addReview(?, ?, ?, ?);”, “ssis “, username, isbn, rating, comments);
+       $search_result = $this->db->query("Call addReview(?, ?, ?, ?);", "ssis", $username, $isbn, $rating, $comments);
+      // $search_result = $this->db->query("Insert into review1 (username, isbn, date, rating) VALUES (?, ?, ?, ?)", "ssss", $user, $isbn, $date, $rating);
+      // $search_result = $this->db->query("Insert into review2 (username, isbn, comments) VALUES (?, ?, ?)", "sss", $user, $isbn, $comments);
+    }catch(Exception $ew){
+      $search_result = $this->db->query("UPDATE review1 SET rating=? where username=?", "ss", $rating, $user);
+      $search_result = $this->db->query("UPDATE review2 SET comments=? where username=? and isbn=?", "sss", $comments, $user, $isbn);
+    }
+
+      header("Location: {$this->base_url}?page=account&command=add_reviews&name={$isbn}");
+    }
+    include ('views/add_reviews.php');
+  }
+
+  
+  public function removeFav() {
+    $search_result = [];
+    $isbn =  $_GET["name"];
+    $user = $_SESSION['username'];
+    $review1 = $this->db->query("DELETE FROM favorites where username=? and isbn=?", "ss", $user, $isbn);
+    
+   
+
+      header("Location: {$this->base_url}?page=account&command=mybooks");
+    
+    // include ('views/add_reviews.php');
+  }
+
+  
+  public function addFav() {
+    $search_result = [];
+    $isbn =  $_GET["name"];
+    $user = $_SESSION['username'];
+    $review1 = $this->db->query("INSERT INTO favorites(username, isbn) VALUES (?, ?)", "ss", $user, $isbn);
+    
+   
+
+    // header("Location: {$this->base_url}?page=search&command=search_form");
+    
+    include ('views/mybooks.php');
   }
 }
