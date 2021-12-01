@@ -76,6 +76,7 @@ class Account {
 
   public function mybooks() {
     // code related to mybooks goes here
+    $mybooks = $this->db->query("select * from user1 natural join favorites natural join book1 where username = ?;", "s", $_SESSION["username"]);
     include ('views/mybooks.php');
   }
 
