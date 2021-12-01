@@ -71,14 +71,14 @@ if(isset($_POST["bookName"]) and isset($_POST["bookAuthor"]) and isset($_POST["b
   $datetoday = date("Y-m-d");
   $add_checkout_stmt->bind_param("sss", $user["username"], $bookisbn , $datetoday);
   
-  //if(preg_match('/^\w+@virginia\.edu$/i', $user["email"]) > 0){
+  if(preg_match('/^\w+@virginia\.edu$/i', $user["email"]) > 0){
       $add_book2_stmt->execute();
       $add_book1_stmt->execute();
       $add_author_stmt->execute();
       $add_writes_stmt->execute();
       $add_checkout_stmt->execute();
-  //}
-  //else {echo "You don't have administrative privilige";}
+  }
+  else {echo "You don't have administrative privilige";}
 }
 
 ?>
