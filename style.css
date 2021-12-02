@@ -1,0 +1,42 @@
+body {
+  font-family: 'Playfair Display', serif;
+}
+:root {
+  --dark-theme-color: #8B6E2B;
+  --medium-theme-color: #BC8810;
+  --light-theme-color: rgba(188,136,16,0.53);
+}
+
+.nav-item {
+  margin-left: 2rem;
+}
+.nav-link {
+  color: var(--light-theme-color) !important;
+  font-family: 'Roboto', light;
+  font-size: 1.4rem;
+}
+.dropdown-menu .dropdown-item {
+  color: var(--medium-theme-color) !important;
+}
+
+.list-group-item {
+  color: var(--medium-theme-color);
+}
+
+/* search page */
+.card {
+  /* Add shadows to create the "card" effect */
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width:50%;
+}
+
+/* On mouse-over, add a deeper shadow */
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+/* Add some padding inside the card container */
+.container {
+  padding: 2px 16px;
+}
