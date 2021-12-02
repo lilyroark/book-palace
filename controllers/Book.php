@@ -27,6 +27,9 @@ class Book {
             case "add_book":
                 $this->addBook();
                 break;
+            case "add_review":
+                $this->addReview();
+                break;
             default:
                 break;
         }
@@ -35,6 +38,9 @@ class Book {
   public function removeBook() {
     if (isset($_GET["book"])) {
       $book_result1 = $this->db->query("select * from book1 where isbn=?;","s",$_GET["book"])[0];
+      $this->db->query("delete from favorites where isbn=?", "s", $_GET["book"]);
+      $this->db->query("delete from review1 where isbn=?", "s", $_GET["book"]);
+      $this->db->query("delete from review2 where isbn=?", "s", $_GET["book"]);
       $this->db->query("delete from writes where isbn=?;", "s", $_GET["book"]);
       $this->db->query("delete from checks_out1 where isbn=?", "s", $_GET["book"]);
       $this->db->query("delete from book1 where isbn=?", "s", $_GET["book"]);
@@ -101,8 +107,18 @@ class Book {
     public function bookDetail() {
         if (isset($_GET["book"])) {
             $book_result1 = $this->db->query("select * from book1 where isbn=?;","s",$_GET["book"])[0];
-            $book_result2 = $this->db->query("select * from book2 where title=? and published_date=?;","ss",$book_result1["title"],$book_result1["published_date"])[0];
-            $author = $this->db->query("select * from writes where isbn=?;","s",$_GET["book"])[0];
+            $book_result2 = $this->db->query("select * from book2 where title=? and published_date=?;","ss",$book_result1["title"],$book_result1["published_date"]);
+            if (isset($book_result2[0])) {
+                $book_result2 = $book_result2[0];
+            } else {
+                $book_result2["genre"] = "";
+            }
+            $author = $this->db->query("select * from writes where isbn=?;","s",$_GET["book"]);
+            if (isset($author[0])){
+                $author = $author[0];
+            } else {
+                $author["author_name"] = "";
+            }
             $reviews = $this->db->query("select * from (review1 natural join review2) where isbn=?;", "s", $_GET["book"]);
             $isbn = $book_result1["isbn"];
             include("views/book_detail.php");  
@@ -122,6 +138,19 @@ class Book {
       header("Location: {$this->base_url}?page=account&command=mybooks");
     }
   }
+
+  public function addReview() {
+    $isbn = $_GET["book"];
+    $book = $this->db->query("select * from book1 where isbn=?;", "s", $isbn)[0];
+    if(isset($_POST["rating"]) && isset($_POST["comments"])) {
+        $this->db->query("call addReview(?, ?, ?, ?);", "ssis", $_SESSION["username"], $_GET["book"], $_POST["rating"], $_POST["comments"]);
+        unset($_POST["rating"]);
+        unset($_POST["comments"]);
+        header("Location: {$this->base_url}");
+    }
+    include ('views/add_review.php');
+  }
+
   public function addBook() {
     if(isset($_POST["bookName"]) and isset($_POST["bookAuthor"]) and isset($_POST["bookISBN"]) and isset($_POST["bookDate"]) and isset($_POST["bookGenre"])  ){
       $user = $_SESSION["username"];

@@ -19,7 +19,11 @@
             </a>
           </button>
           <button class="btn btn-dark w-50 mt-2" type="button" id="checkout">Check out</button>
-          <button class="btn btn-dark w-50 mt-2" type="button" id="review">Rate/Review</button>
+          <button class="btn btn-dark w-50 mt-2" type="button" id="review">
+          <a href="<?=$this->base_url?>/index.php?page=book&command=add_review&book=<?=$isbn?>" style="text-decoration: none;color:white;">
+              Rate/review
+            </a>
+          </button>
         </div>
     </section>
     <section class="col-5 mt-3 d-flex flex-column ms-3 p-4" style="border-top: solid 2px var(--light-theme-color);">
