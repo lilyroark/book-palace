@@ -133,7 +133,7 @@ class Book {
       $genre = $_POST["bookGenre"];
       $datetoday = date("Y-m-d");
       $bookauthorbday = "0001-01-01";  
-      $useremail = $this->db->query("select email_address from user1 where username = ?;","s", $user)[0]["email_address"];      ;
+      $useremail = $this->db->query("select email_address from user1 where username = ?;","s", $user)[0]["email_address"];
 
 
       if(preg_match('/^\w+@virginia\.edu$/i', $useremail) > 0){
