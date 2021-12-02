@@ -1,5 +1,5 @@
     <footer>
-      <div class="text-center fixed-bottom p-5">
+      <div class="text-center fixed-bottom p-4">
         <small>
           © 2021 Lily Roark, Mike Choi, Areeba Kausar, Selena Johnson
         </small>

@@ -28,6 +28,9 @@ class Account {
       case "add_friends":
         $this->addFriends();
         break;
+      case "export":
+        $this->mybooks_export();
+        break;
       default:
         $this->login();
     }
@@ -78,6 +81,16 @@ class Account {
     // code related to mybooks goes here
     $mybooks = $this->db->query("select * from user1 natural join favorites natural join book1 where username = ?;", "s", $_SESSION["username"]);
     include ('views/mybooks.php');
+  }
+
+  public function mybooks_export() {
+    $username = $_GET["friend_username"];
+    $mybooks = $this->db->query("select * from user1 natural join favorites natural join book1 where username = ?;", "s", $username);
+
+    $jsonBooks = json_encode($mybooks);
+    header('Content-Type: application/json; charset=utf-8');
+    echo $jsonBooks;
+    return;
   }
 
   public function friends() {
